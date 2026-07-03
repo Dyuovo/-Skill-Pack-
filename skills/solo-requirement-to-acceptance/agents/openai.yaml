@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Requirement To Acceptance"
+  short_description: "Turn requirements into acceptance tests."
+  default_prompt: "Use $solo-requirement-to-acceptance to make this requirement buildable and testable."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo PM Dev Growth Roadmap"
+  short_description: "Plan product-plus-dev growth."
+  default_prompt: "Use $solo-pm-dev-growth-roadmap to create my 6-8 month growth plan."

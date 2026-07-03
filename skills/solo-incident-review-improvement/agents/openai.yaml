@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Incident Review Improvement"
+  short_description: "Review incidents and improve safeguards."
+  default_prompt: "Use $solo-incident-review-improvement to review this failure and update safeguards."

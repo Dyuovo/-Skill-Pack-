@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo MVP Scope Roadmap"
+  short_description: "Cut MVP scope and roadmap slices."
+  default_prompt: "Use $solo-mvp-scope-roadmap to decide the MVP scope and release slices."

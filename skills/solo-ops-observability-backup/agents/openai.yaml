@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Ops Observability Backup"
+  short_description: "Set up monitoring, logs, and backups."
+  default_prompt: "Use $solo-ops-observability-backup to define monitoring, logs, and backups."

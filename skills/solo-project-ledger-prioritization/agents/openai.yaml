@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Project Ledger Prioritization"
+  short_description: "Manage project ledger and WIP."
+  default_prompt: "Use $solo-project-ledger-prioritization to update my project ledger and priorities."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Task Breakdown Kanban"
+  short_description: "Split work into kanban-ready tasks."
+  default_prompt: "Use $solo-task-breakdown-kanban to break this project into weekly tasks."

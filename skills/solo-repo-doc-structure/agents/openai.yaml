@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Repo Doc Structure"
+  short_description: "Set up repo docs and runbook folders."
+  default_prompt: "Use $solo-repo-doc-structure to create a lightweight docs structure for this repo."

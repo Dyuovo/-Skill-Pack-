@@ -1,0 +1,16 @@
+interface:
+  display_name: "Solo Fragment Collector"
+  short_description: "持久化 Product State、结构化对话碎片、决策账本和阶段碎片"
+  default_prompt: |
+    Use $solo-fragment-collector to initialize, capture, inspect, or update Product State and conversation fragments.
+
+    Prefer product_state_store.py for the Product State source of truth:
+    - init
+    - status
+    - capture
+    - set
+    - add
+    - decision
+    - gap
+
+    Use fragment_store.py for legacy phase-specific Markdown fragments and consolidation history.

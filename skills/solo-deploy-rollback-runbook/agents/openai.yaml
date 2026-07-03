@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Deploy Rollback Runbook"
+  short_description: "Deploy, verify, record, and rollback."
+  default_prompt: "Use $solo-deploy-rollback-runbook to plan or run this deployment."

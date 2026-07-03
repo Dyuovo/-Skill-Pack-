@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Technical Design ADR"
+  short_description: "Design technical changes and ADRs."
+  default_prompt: "Use $solo-technical-design-adr to design this change and capture key decisions."

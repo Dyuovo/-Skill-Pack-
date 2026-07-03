@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Weekly Monthly Review Coach"
+  short_description: "Run weekly and monthly solo reviews."
+  default_prompt: "Use $solo-weekly-monthly-review-coach to guide my weekly or monthly review."

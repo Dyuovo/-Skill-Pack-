@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Implementation Guardrails"
+  short_description: "Check implementation release safeguards."
+  default_prompt: "Use $solo-implementation-guardrails to check this implementation before release."

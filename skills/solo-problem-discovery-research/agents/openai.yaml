@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Problem Discovery Research"
+  short_description: "Validate users, problems, and alternatives."
+  default_prompt: "Use $solo-problem-discovery-research to validate this product problem before I scope an MVP."

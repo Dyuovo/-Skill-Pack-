@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Self Test Quality Gate"
+  short_description: "Build self-test and release gates."
+  default_prompt: "Use $solo-self-test-quality-gate to create the self-test checklist for this change."

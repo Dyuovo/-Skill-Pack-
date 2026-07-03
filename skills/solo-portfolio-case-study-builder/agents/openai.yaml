@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Portfolio Case Study Builder"
+  short_description: "Turn shipped work into case studies."
+  default_prompt: "Use $solo-portfolio-case-study-builder to write a portfolio case study for this project."

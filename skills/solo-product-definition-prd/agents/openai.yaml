@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Product Definition PRD"
+  short_description: "Write a lean PRD for solo products."
+  default_prompt: "Use $solo-product-definition-prd to turn this idea into a lean PRD."

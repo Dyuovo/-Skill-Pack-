@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Idea Intake Triage"
+  short_description: "Triage product ideas into next actions."
+  default_prompt: "Use $solo-idea-intake-triage to evaluate this idea and decide the next action."

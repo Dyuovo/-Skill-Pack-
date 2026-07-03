@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solo Release Artifact Builder"
+  short_description: "Prepare tags, artifacts, and checksums."
+  default_prompt: "Use $solo-release-artifact-builder to package this release safely."
