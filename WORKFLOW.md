@@ -6,14 +6,14 @@
 
 - 项目缺少清晰 PRD、任务、测试、发布或运维记录。
 - 用户想把想法推进为可交付项目。
-- 需要审查四 Agent 架构或其他项目的结构缺口。
+- 需要审查项目架构或其他项目的结构缺口。
 - 需要把零散讨论沉淀为可复用项目资产。
 
 ## 1. 扫描
 
 读取：
 
-- README / AGENTS / 架构文档
+- README / 架构文档
 - `docs/`
 - 配置样例与环境变量说明
 - 测试与发布脚本
@@ -67,35 +67,31 @@ docs/adr/ADR-NNN-short-title.md
 
 可从 `templates/adr-000.md` 复制后改编号。
 
-## 4. 进入小枢治理
+## 4. 治理沉淀
 
-只有以下内容进入 AI_SYSTEM：
+只有以下内容进入长期治理：
 
 - 经验证的长期规则
 - 可重复使用 3 次以上的 Skill
-- 跨 Agent 或跨日任务
+- 跨项目或跨日任务
 - 系统级风险和架构改良建议
 
-## 5. 小电学习转化
+## 5. 学习转化
 
-小电可把本工作流转成：
+可用于：
 
-- AI PM 方法论课程素材
+- PM 方法论课程素材
 - PRD / ADR / 验收标准练习
-- Agent 架构设计题
+- 架构设计题
 - 作品集案例复盘
 
-小电只负责理解、教学、练习和反馈，不直接改治理层。
+只负责理解、教学、练习和反馈，不直接改治理层。
 
 ## 6. 测试升级路径
 
-当前 Skill 状态为 `testing`。首个端到端候选优先选择：
+当前 Skill 状态为 active（已验证一个完整闭环）。
 
-```text
-AI_SYSTEM/02_XIAOTING/POWER_MARKET_AGENT/
-```
-
-升为 `active` 前，至少完成一次真实项目闭环：
+首个端到端候选优先选择你当前最需要的项目。升为 active 前，至少完成一次真实项目闭环：
 
 ```text
 project.scan -> change.init -> prd.build -> adr.build -> self-test -> release/check or rollback record -> review

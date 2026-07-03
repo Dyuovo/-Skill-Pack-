@@ -1,8 +1,8 @@
 # Validation Log
 
-## 2026-06-17: POWER_MARKET_AGENT First Loop
+## 2026-06-17: First End-to-End Project Loop
 
-- Project: `AI_SYSTEM/02_XIAOTING/POWER_MARKET_AGENT/`
+- Project: Sample real-world project
 - Change: `REQ-2026-001`
 - Status: completed
 - Runtime config touched: no
@@ -22,14 +22,13 @@
 
 ## Key Findings
 
-- Electricity price collection is paused and should be treated as a core data-source risk for daily reports and Pulse.
-- Output directories should be unified across `daily_pulse/`, `output/`, `outputs/`, and `pulse_output/`.
+- Data collection pipeline should be treated as a core data-source risk for daily reports.
+- Output directories should be unified for consistency.
 
 ## Upgrade Status
 
 | Active Condition | Status |
 |---|---|
 | One real project end-to-end loop | Done |
-| No Xiaoshu/Xiaodian long-term memory pollution | Done |
+| No long-term memory pollution | Done |
 | Artifacts reused in later system improvement | Pending |
-

@@ -37,37 +37,22 @@ On every relevant turn:
 
 Use deterministic storage when available:
 
-```powershell
-function Invoke-ProjectPython {
-  param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Args)
-  if (Get-Command py -ErrorAction SilentlyContinue) { & py -3 @Args; return }
-  if (Get-Command python -ErrorAction SilentlyContinue) { & python @Args; return }
-  throw "No Python interpreter found. Install Python or fix the launcher before continuing."
-}
-$stateScript = if (Test-Path ".trae\skills\solo-fragment-collector\scripts\product_state_store.py") {
-  ".trae\skills\solo-fragment-collector\scripts\product_state_store.py"
-} else {
-  "$env:USERPROFILE\.trae-cn\skills\solo-fragment-collector\scripts\product_state_store.py"
-}
-$gateScript = if (Test-Path ".trae\skills\solo-fragment-collector\scripts\workflow_gate.py") {
-  ".trae\skills\solo-fragment-collector\scripts\workflow_gate.py"
-} else {
-  "$env:USERPROFILE\.trae-cn\skills\solo-fragment-collector\scripts\workflow_gate.py"
-}
-Invoke-ProjectPython $stateScript init
-Invoke-ProjectPython $stateScript capture --type requirement --evidence assumption --raw "<user text>" --meaning "<interpreted meaning>"
-Invoke-ProjectPython $stateScript brief
-Invoke-ProjectPython $stateScript reconcile --change-id REQ-YYYY-NNN
-Invoke-ProjectPython $stateScript promote-maturity Buildable
-Invoke-ProjectPython $gateScript start-implementation --change-id REQ-YYYY-NNN --intent "<implementation intent>"
+```bash
+# Run from the project root or use --root to specify the project path
+python3 scripts/product_state_store.py --root . init
+python3 scripts/product_state_store.py --root . capture --type requirement --evidence assumption --raw "<user text>" --meaning "<interpreted meaning>"
+python3 scripts/product_state_store.py --root . brief
+python3 scripts/product_state_store.py --root . reconcile --change-id REQ-YYYY-NNN
+python3 scripts/product_state_store.py --root . promote-maturity Buildable
+python3 scripts/workflow_gate.py --root . start-implementation --change-id REQ-YYYY-NNN --intent "<implementation intent>"
 ```
 
-Do not call `python` directly in this workflow. On Windows it may point to a placeholder launcher; use `Invoke-ProjectPython` or `py -3`.
+On systems where `python3` is not available, use `python` or `py -3` instead.
 
 Use legacy fragment storage only for phase-specific source notes and consolidation history:
 
-```powershell
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" capture requirement "<fragment>"
+```bash
+python3 scripts/fragment_store.py --root . capture requirement "<fragment>"
 ```
 
 ## Context Budget
@@ -232,9 +217,9 @@ The review must cover six dimensions with a checked PASS or N/A and evidence:
 
 Then run:
 
-```powershell
-Invoke-ProjectPython $gateScript architecture-hardening --change-id <REQ-YYYY-NNN>
-Invoke-ProjectPython $stateScript promote-maturity Operable
+```bash
+python3 scripts/workflow_gate.py --root . architecture-hardening --change-id <REQ-YYYY-NNN>
+python3 scripts/product_state_store.py --root . promote-maturity Operable
 ```
 
 Do not claim Operable while `architecture-hardening.md` is missing, BLOCKED, or manually marked PASS without the gate command.

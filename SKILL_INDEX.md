@@ -1,9 +1,8 @@
-# Solo Product Engineering Skills — AI_SYSTEM 集成索引
+# Solo Product Engineering Skills — 完整索引
 
-版本：v0.2.0
-状态：active（已从 Joey 提供的 integrated package 完整导入）
-最后更新：2026-06-25
-源：`solo-product-engineering-skills-integrated.zip`（Joey 通过飞书发送）
+版本：v0.3.0
+状态：active
+最后更新：2026-07-03
 
 ## 三层架构
 
@@ -12,7 +11,7 @@
     ↓
 工具层（18 个）：产品阶段(7) + 工程阶段(6) + 运营阶段(5)
     ↓
-持久层：solo-fragment-collector（scripts 已部署到 08_TOOLS/）
+持久层：solo-fragment-collector（确定性脚本位于 `scripts/`）
 ```
 
 ## 20 个 Skill 目录
@@ -57,26 +56,26 @@
 | 19 | `solo-portfolio-case-study-builder` | 做完了、上线了 | 作品案例 |
 | 20 | `solo-fragment-collector` | 全程自动 | 碎片读写+合并历史 |
 
-## AI_SYSTEM 内的 Agent 归属
+## 使用场景
 
-| Agent | 拥有/使用 Skill | 说明 |
-|-------|----------------|------|
-| **小枢**（治理层）| 全部 20 个 Skill 的主入口 | 产品工程模式（testing→active）时作为总控，operator 自动检测信号→路由 |
-| **小电**（学习）| #18 solo-pm-dev-growth-roadmap + PRD/ADR 理解 | 学习产品工程方法论，成长路线 |
-| **小霆**（业务）| #13-16 部署/运维/运维相关 | POWER_MARKET_AGENT 项目的发布和运维 |
-| **小衡** | 不直接使用 | 与产品工程无关 |
+| 场景 | 推荐 Skill |
+|------|----------|
+| **个人项目创业者** | 全部 20 个 Skill，按需串联 |
+| **AI 辅助开发** | operator 入口 + fragment-collector 持久化 |
+| **学习产品工程** | #18 pm-dev-growth-roadmap + PRD/ADR 练习 |
+| **运维部署** | #13-16 deploy/ops/incident/release |
 
 ## 确定性脚本
 
-已部署到 `08_TOOLS/product_engineering/`：
+位于 `scripts/` 目录：
 
 | 脚本 | 功能 | 用法 |
 |------|------|------|
-| `fragment_store.py` | 8阶段碎片初始化/写入/读取/合并/diff | `python3 08_TOOLS/product_engineering/fragment_store.py init/capture/status/read/consolidate/diff` |
-| `product_state_store.py` | Product State 管理（init/brief/set/add/capture/decision/gap/promote-maturity/reconcile）| `python3 08_TOOLS/product_engineering/product_state_store.py ...` |
-| `workflow_gate.py` | 实现门禁/发布门禁/架构加固检查 | `python3 08_TOOLS/product_engineering/workflow_gate.py start-implementation/start-release/architecture-hardening ...` |
+| `fragment_store.py` | 8阶段碎片初始化/写入/读取/合并/diff | `python3 scripts/fragment_store.py init/capture/status/read/consolidate/diff` |
+| `product_state_store.py` | Product State 管理（init/brief/set/add/capture/decision/gap/promote-maturity/reconcile）| `python3 scripts/product_state_store.py ...` |
+| `workflow_gate.py` | 实现门禁/发布门禁/架构加固检查 | `python3 scripts/workflow_gate.py start-implementation/start-release/architecture-hardening ...` |
 
-> 脚本原为 Trae IDE 设计（Windows 路径），已适配 AI_SYSTEM Linux 环境。用户需自行指定 `--root` 指向目标项目。
+> 跨平台（Windows / macOS / Linux），使用 `--root` 指定目标项目路径。
 
 ## 碎片持久化目录（按项目）
 
@@ -116,5 +115,6 @@
 
 ## 变更历史
 
-- v0.2.0 (2026-06-25): 从 Joey 提供的 integrated package 完整导入 20 个 Skill + 3 个脚本；状态从 testing 升为 active
-- v0.1.0 (2026-06-17): 初始 staging，碎片工具验证，POWER_MARKET_AGENT 第一轮闭环
+- v0.3.0 (2026-07-03): 移除平台特定路径和工具绑定，通用化全部文档和脚本
+- v0.2.0 (2026-06-25): 完整 20 个 Skill + 3 个确定性脚本；strong/weak/suspected 信号分层
+- v0.1.0 (2026-06-17): 初始版本，碎片工具验证，首个项目闭环

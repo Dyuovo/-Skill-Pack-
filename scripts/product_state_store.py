@@ -558,8 +558,8 @@ def command_reconcile(args: argparse.Namespace) -> None:
     elif prd.startswith("# PRD:"):
         state["product_summary"] = prd.splitlines()[0].replace("# PRD:", "").strip()
 
-    if "Joey" in prd:
-        append_unique(state["target_users"], "Joey（单人自用）")
+    if "单人自用" in prd:
+        append_unique(state["target_users"], "单人开发者")
     if "碎片化想法" in prd or "经常找不到" in prd:
         state["core_problem"] = "有价值的想法散落在微信、QQ等聊天记录中，缺少统一检索入口，事后难以回溯。"
     if "打开工具" in prd and "搜索关键词" in prd:

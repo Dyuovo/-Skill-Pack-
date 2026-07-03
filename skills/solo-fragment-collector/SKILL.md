@@ -20,27 +20,17 @@ Use deterministic scripts instead of manually editing these files when possible.
 
 Run from the target project root:
 
-```powershell
-function Invoke-ProjectPython {
-  param([Parameter(ValueFromRemainingArguments = $true)][string[]]$Args)
-  if (Get-Command py -ErrorAction SilentlyContinue) { & py -3 @Args; return }
-  if (Get-Command python -ErrorAction SilentlyContinue) { & python @Args; return }
-  throw "No Python interpreter found. Install Python or fix the launcher before continuing."
-}
-$stateScript = if (Test-Path ".trae\skills\solo-fragment-collector\scripts\product_state_store.py") {
-  ".trae\skills\solo-fragment-collector\scripts\product_state_store.py"
-} else {
-  "$env:USERPROFILE\.trae-cn\skills\solo-fragment-collector\scripts\product_state_store.py"
-}
-Invoke-ProjectPython $stateScript init
-Invoke-ProjectPython $stateScript brief
-Invoke-ProjectPython $stateScript capture --type requirement --evidence assumption --raw "能不能自动一点" --meaning "用户希望减少手动操作"
-Invoke-ProjectPython $stateScript set core_problem "用户当前流程存在重复手工操作"
-Invoke-ProjectPython $stateScript add mvp_scope "v0 支持单人完成主流程"
-Invoke-ProjectPython $stateScript decision "v0 不做多人协作" --reason "当前目标用户是个人操作者" --impact "暂不设计 org/team 模型"
-Invoke-ProjectPython $stateScript reconcile --change-id REQ-2026-002
-Invoke-ProjectPython $stateScript promote-maturity Buildable
-Invoke-ProjectPython $stateScript resolve-gap "/health/live"
+```bash
+# Run from the project root or use --root to specify the project path
+python3 scripts/product_state_store.py --root . init
+python3 scripts/product_state_store.py --root . brief
+python3 scripts/product_state_store.py --root . capture --type requirement --evidence assumption --raw "能不能自动一点" --meaning "用户希望减少手动操作"
+python3 scripts/product_state_store.py --root . set core_problem "用户当前流程存在重复手工操作"
+python3 scripts/product_state_store.py --root . add mvp_scope "v0 支持单人完成主流程"
+python3 scripts/product_state_store.py --root . decision "v0 不做多人协作" --reason "当前目标用户是个人操作者" --impact "暂不设计 org/team 模型"
+python3 scripts/product_state_store.py --root . reconcile --change-id REQ-2026-002
+python3 scripts/product_state_store.py --root . promote-maturity Buildable
+python3 scripts/product_state_store.py --root . resolve-gap "/health/live"
 ```
 
 Useful options:
@@ -61,18 +51,14 @@ Useful options:
 
 Use this script to make implementation and release gates deterministic:
 
-```powershell
-$gateScript = if (Test-Path ".trae\skills\solo-fragment-collector\scripts\workflow_gate.py") {
-  ".trae\skills\solo-fragment-collector\scripts\workflow_gate.py"
-} else {
-  "$env:USERPROFILE\.trae-cn\skills\solo-fragment-collector\scripts\workflow_gate.py"
-}
-Invoke-ProjectPython $gateScript start-implementation --change-id REQ-2026-002 --intent "implement search bug fix"
-Invoke-ProjectPython $gateScript implementation-status --change-id REQ-2026-002
-Invoke-ProjectPython $gateScript complete-implementation --change-id REQ-2026-002 --evidence "manual API check passed"
-Invoke-ProjectPython $gateScript drift --change-id REQ-2026-002
-Invoke-ProjectPython $gateScript start-release --change-id REQ-2026-002
-Invoke-ProjectPython $gateScript architecture-hardening --change-id REQ-2026-002
+```bash
+# Run from the project root or use --root to specify the project path
+python3 scripts/workflow_gate.py --root . start-implementation --change-id REQ-2026-002 --intent "implement search bug fix"
+python3 scripts/workflow_gate.py --root . implementation-status --change-id REQ-2026-002
+python3 scripts/workflow_gate.py --root . complete-implementation --change-id REQ-2026-002 --evidence "manual API check passed"
+python3 scripts/workflow_gate.py --root . drift --change-id REQ-2026-002
+python3 scripts/workflow_gate.py --root . start-release --change-id REQ-2026-002
+python3 scripts/workflow_gate.py --root . architecture-hardening --change-id REQ-2026-002
 ```
 
 `start-implementation` writes `implementation-gate.md` and fails if Product State or required artifacts are missing.
@@ -183,13 +169,14 @@ Do not promote maturity just because a document exists.
 
 Use this for source material and consolidation history:
 
-```powershell
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" init
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" capture requirement "用户希望上传头像并限制 2MB"
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" status
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" read requirement
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolidate requirement
-Invoke-ProjectPython ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" diff requirement
+```bash
+# Run from the project root or use --root to specify the project path
+python3 scripts/fragment_store.py --root . init
+python3 scripts/fragment_store.py --root . capture requirement "用户希望上传头像并限制 2MB"
+python3 scripts/fragment_store.py --root . status
+python3 scripts/fragment_store.py --root . read requirement
+python3 scripts/fragment_store.py --root . consolidate requirement
+python3 scripts/fragment_store.py --root . diff requirement
 ```
 
 Legacy structure:

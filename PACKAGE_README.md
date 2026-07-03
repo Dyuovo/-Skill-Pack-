@@ -1,12 +1,12 @@
 # Solo Product Engineering Skills
 
-> 嵌入 Trae 的单人产品工程操作系统 — 从想法到上线运维，20 个 Skill 全链路覆盖。
+> AI 辅助的单人产品工程操作系统 — 从想法到上线运维，20 个 Skill 全链路覆盖。
 
 ---
 
 ## 一、这是什么
 
-一套 Trae 自定义 Skill 工具集，为单人开发者/独立创始人设计。覆盖产品工程的完整生命周期：
+一套 AI 工具 Skill 集，为单人开发者 / 独立创始人设计。覆盖产品工程的完整生命周期：
 
 - 想法评估 → 需求调研 → PRD → MVP 路线图 → 技术设计 → 任务拆解 → 编码护栏 → 自测 → 发布 → 部署 → 运维 → 事故复盘 → 周月复盘 → 成长规划 → 作品案例
 
@@ -16,50 +16,58 @@
 
 ## 二、安装
 
-### 2.1 一键安装（推荐）
+### 2.1 手动部署（推荐）
 
-```powershell
-# 1. 解压 solo-product-engineering-skills.zip 到任意目录
-# 2. 在解压目录运行，指定目标项目：
-.\install.ps1 -TargetPath "C:\path\to\your-project"
+将本仓库克隆或下载到本地，复制 `skills/` 目录到你使用的 AI 工具的 skills 目录中：
 
-# 也可以安装到当前目录：
-.\install.ps1
+| AI 工具 | Skills 目录 | 说明 |
+|:---|:---|:---|
+| **Cursor** | 项目根目录的 `.cursor/skills/` | 项目级 Skill |
+| **Claude Code** | `~/.claude/skills/` | 全局或项目级 |
+| **OpenClaw** | 项目 `AGENTS.md` 中引用 | 通过 Agent 配置加载 |
+| **GitHub Copilot** | 通过自定义指令加载 SKILL.md 内容 | 粘贴到 `.github/copilot-instructions.md` |
 
-# 覆盖已有安装：
-.\install.ps1 -TargetPath "C:\path\to\your-project" -Force
+也可以将 SKILL.md 内容直接粘贴到你的 AI 对话中作为系统提示。
 
-# 需要全局规则时显式启用：
-.\install.ps1 -TargetPath "C:\path\to\your-project" -GlobalRules
-```
-
-安装脚本会自动：
-1. 将 20 个 Skill 部署到项目的 `.trae/skills/`
-2. 将规则文件部署到项目的 `.trae/rules/`
-3. 可选将规则文件部署到 Trae 全局目录（`-GlobalRules`）
-
-### 2.2 手动部署
-
-解压后，将 `.trae/` 目录整体复制到目标项目根目录。
-
-### 2.3 文件位置
-
-所有文件已在当前项目的 `.trae/` 目录下：
+### 2.2 目录结构
 
 ```
-.trae/
-├── skills/          ← 20 个 Skill 定义
-│   ├── solo-idea-intake-triage/SKILL.md
-│   ├── solo-problem-discovery-research/SKILL.md
-│   ├── ... (共 20 个)
-│   └── solo-fragment-collector/SKILL.md
-└── rules/
-    └── project_rules.md   ← 自动触发规则
+skills/
+├── solo-product-engineering-operator/   ← 总控入口
+├── solo-idea-intake-triage/             ← 产品阶段 (7个)
+├── solo-problem-discovery-research/
+├── solo-product-definition-prd/
+├── solo-mvp-scope-roadmap/
+├── solo-project-ledger-prioritization/
+├── solo-requirement-to-acceptance/
+├── solo-repo-doc-structure/
+├── solo-technical-design-adr/           ← 工程阶段 (6个)
+├── solo-task-breakdown-kanban/
+├── solo-implementation-guardrails/
+├── solo-self-test-quality-gate/
+├── solo-release-artifact-builder/
+├── solo-deploy-rollback-runbook/
+├── solo-ops-observability-backup/       ← 运营阶段 (5个)
+├── solo-incident-review-improvement/
+├── solo-weekly-monthly-review-coach/
+├── solo-pm-dev-growth-roadmap/
+├── solo-portfolio-case-study-builder/
+└── solo-fragment-collector/             ← 持久化引擎
 ```
 
-### 2.4 全局规则（可选）
+### 2.3 确定性脚本
 
-使用 `-GlobalRules` 时，安装脚本会将规则文件部署到 `~/.trae-cn/rules/`。如果此方法不生效，每个项目单独运行一次 `install.ps1 -TargetPath <项目路径>` 即可。
+```bash
+# 初始化项目碎片系统
+python3 scripts/fragment_store.py --root /path/to/your-project init
+
+# 管理 Product State
+python3 scripts/product_state_store.py --root /path/to/your-project init
+python3 scripts/product_state_store.py --root /path/to/your-project brief
+
+# 工作流门禁
+python3 scripts/workflow_gate.py --root /path/to/your-project start-implementation --change-id REQ-2026-001
+```
 
 ---
 
@@ -154,11 +162,11 @@
        ↓
 强/弱/疑似分层判断
        ↓
-solo-fragment-collector 脚本 Capture → 写入磁盘文件
+fragment-collector 脚本 Capture → 写入磁盘文件
        ↓ 达到阈值
-solo-fragment-collector.Consolidate → 归档碎片 + 产出结构化文档 + 更新 changelog
+fragment-collector.Consolidate → 归档碎片 + 产出结构化文档 + 更新 changelog
        ↓
-solo-fragment-collector.Diff → 展示改进变化
+fragment-collector.Diff → 展示改进变化
 ```
 
 ### 5.2 碎片阈值
@@ -196,13 +204,11 @@ docs/changes/REQ-YYYY-NNN/
 
 ### 5.4 确定性脚本
 
-`solo-fragment-collector` 带有 `scripts/fragment_store.py`，用于初始化、写入、读取状态和归档：
-
-```powershell
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" init
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" capture requirement "用户希望上传头像并限制 2MB"
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" status
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolidate requirement
+```bash
+python3 scripts/fragment_store.py --root /path/to/project init
+python3 scripts/fragment_store.py --root /path/to/project capture requirement "用户希望上传头像并限制 2MB"
+python3 scripts/fragment_store.py --root /path/to/project status
+python3 scripts/fragment_store.py --root /path/to/project consolidate requirement
 ```
 
 ---
@@ -226,7 +232,7 @@ python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolid
 
 ### 7.1 被动模式（推荐）
 
-你正常和 Trae 对话，系统自动：
+你正常和你的 AI 工具对话，系统自动：
 
 - 检测信号 → 收纳碎片
 - 弱信号先判断是否属于当前 active change
@@ -300,9 +306,9 @@ python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolid
 ## 十、贡献与扩展
 
 如需新增 Skill：
-1. 在 `.trae/skills/<skill-name>/` 下创建 `SKILL.md`（含 frontmatter）
+1. 在 `skills/<skill-name>/` 下创建 `SKILL.md`（含 frontmatter）
 2. 在本文件更新 Skill 目录表
-3. 在 `project_rules.md` 添加触发规则
+3. 在规则文件中添加触发规则
 
 **Skill 格式**：
 

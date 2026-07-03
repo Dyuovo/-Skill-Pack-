@@ -2,7 +2,7 @@
 
 ## 概述
 
-Solo Product Engineering Skills 是一套嵌入 Trae IDE 的产品工程操作系统，由 20 个 Skill 组成。它将"记不住、容易漏"的产品工程纪律，变成对话中有规则、有持久化脚本、有质量门禁的轻量操作流。
+Solo Product Engineering Skills 是一套 AI 辅助的产品工程操作系统，由 20 个 Skill 组成。它将"记不住、容易漏"的产品工程纪律，变成对话中有规则、有持久化脚本、有质量门禁的轻量操作流。
 
 ---
 
@@ -145,11 +145,11 @@ docs/changes/REQ-YYYY-NNN/
 
 ### 持久化脚本
 
-```powershell
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" init
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" capture requirement "<fragment>"
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" status
-python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolidate requirement
+```bash
+python3 scripts/fragment_store.py init
+python3 scripts/fragment_store.py capture requirement "<fragment>"
+python3 scripts/fragment_store.py status
+python3 scripts/fragment_store.py consolidate requirement
 ```
 
 脚本只负责可靠文件操作和历史归档；最终 PRD、ADR、看板、自测清单仍由对应专业 Skill 基于碎片生成。
@@ -187,8 +187,8 @@ python ".trae\skills\solo-fragment-collector\scripts\fragment_store.py" consolid
 
 ## 技术约束
 
-- Skill 通过 Trae 的 `.trae/skills/` 目录注册，由 `SKILL.md` 文件定义
-- 自动触发规则通过 `.trae/rules/project_rules.md` 加载，本质是给 LLM 的上下文提示
+- Skill 由各目录下的 `SKILL.md` 文件定义，加载到 AI 工具（Cursor / Claude / OpenClaw 等）即可使用
+- 自动触发规则通过各 AI 工具的项目规则文件加载（如 `.cursorrules`、`AGENTS.md` 等）
 - 碎片持久化依赖 `solo-fragment-collector/scripts/fragment_store.py`，写入 `docs/changes/` 目录
 - `docs/changes/current.md` 是 active change 索引，多需求并行时必须显式切换 `REQ-YYYY-NNN`
-- 规则文件默认仅在本项目有效，全局规则需通过 `install.ps1 -GlobalRules` 显式部署
+- 规则文件按项目配置，可复制到其他项目中复用
